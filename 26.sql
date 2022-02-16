@@ -1,12 +1,8 @@
 SELECT * FROM (
-    SELECT `nombre_empleado`, `salario` + `comision` as `salario_total`
-    FROM `empleados`
-    WHERE `comision` IS NOT NULL
+   SELECT `num_empleado`,
+    `salario`, 
+    `comision`, 
+    `salario` + IF(`comision` IS NOT NULL, `comision`, 0) as `salario_total` 
+    FROM `empleados` 
 ) a
-UNION
-SELECT * FROM (
-    SELECT `nombre_empleado`, `salario` as `salario_total`
-    FROM `empleados`
-    WHERE `comision` IS NULL
-) b
 ORDER BY `salario_total`
