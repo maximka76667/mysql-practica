@@ -1,7 +1,9 @@
-SELECT `empleados`.`num_departamento`, MAX(`suma_salario`)
+SELECT `departamentos`.`NUM_DEPARTAMENTO`, `nombre`, `LOCALIDAD`, `suma_salario`
 FROM (
 SELECT `num_departamento`, SUM(`salario`) as `suma_salario`
 FROM `empleados`
 GROUP BY `num_departamento`
-) a, `empleados`
-WHERE `a`.`num_departamento` = `empleados`.`num_departamento`
+ORDER BY `suma_salario` DESC
+LIMIT 1
+) suma, `departamentos`
+WHERE `suma`.`num_departamento` = `departamentos`.`NUM_DEPARTAMENTO`
